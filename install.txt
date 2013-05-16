@@ -1,0 +1,25 @@
+# install required packages
+yum install -y java-1.7.0-openjdk fontconfig
+# install System Manager
+rpm -Uhv sysmgr-setup-2-0-2-linux.rpm
+
+# add unprivileges user
+useradd netapp
+# copy configs to user's home directory
+cp -R configs/* ~netapp/
+# change owner on SM files and configs
+chown -R netapp:netapp /opt/NetApp/oncommand_system_manager ~netapp/
+# copy startup script to init.d
+cp init.d/netapp /etc/init.d/
+chmod 0755 /etc/init.d/netapp
+# Run it on startup
+chkconfig --add netapp
+chkconfig --levels 2345 netapp on
+/etc/init.d/netapp start
+
+# nginx as reserse proxy
+yum install -y nginx
+chkconfig --levels 2345 nginx on
+# configs are set up for https, don't forget to add your ssl certs!
+cp -R nginx/* /etc/nginx
+/etc/init.d/nginx start
