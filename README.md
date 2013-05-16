@@ -10,7 +10,7 @@ Purpose of those scripts is to install NetApp onCommand System Manager as shared
 - epel repository
 
 ##### Install
-Put downloaded file "sysmgr-setup-2-0-2-linux.rpm" in this directory and run install.sh either by pasting it line by line, or by running "bash install.txt"
+Put downloaded file "sysmgr-setup-2-0-2-linux.rpm" in this directory and run install.txt either by pasting it line by line, or by running "bash install.txt"
 
 ##### Certificates and passwords
 Web server is protected by HTTP Auth, passwords are stored in /etc/nginx/conf.d/htpasswd
