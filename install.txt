@@ -1,5 +1,5 @@
 # install required packages
-yum install -y java-1.7.0-openjdk fontconfig
+yum install -y java-1.7.0-openjdk fontconfig desktop-file-utils
 # install System Manager
 rpm -Uhv sysmgr-setup-2-0-2-linux.rpm
 
