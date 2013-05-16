@@ -20,6 +20,9 @@ chkconfig --levels 2345 netapp on
 # nginx as reserse proxy
 yum install -y nginx
 chkconfig --levels 2345 nginx on
-# configs are set up for https, don't forget to add your ssl certs!
+# Copy default configs, nginx is set up for https
 cp -R nginx/* /etc/nginx
+# Generate self-signed ssl certificate. Don't forget to replace it with your ssl certificate!
+openssl req -x509 -nodes -newkey rsa:2048 -keyout /etc/nginx/conf.d/cert.key -out /etc/nginx/conf.d/cert.crt -days 3650 -subj "/CN=`hostname`"
+
 /etc/init.d/nginx start
