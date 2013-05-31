@@ -28,7 +28,7 @@ openssl req -x509 -nodes -newkey rsa:2048 -keyout /etc/nginx/conf.d/cert.key -ou
 
 /etc/init.d/nginx start
 
-# Optional autorestart
-( crontab -l | sed -e '/SystemManager.jar/d' ; cat << EOT ) | crontab -
-*/5 * * * * pgrep -f "java -Djava.awt.headless=true -jar SystemManager.jar" > /dev/null || /etc/init.d/netapp start
+# Session keepalive crontab
+( crontab -l | sed -e '/operation=register-session/d' ; cat << EOT ) | crontab -
+*/5 * * * * curl -s -k -d "sessionId=undefined&operation=register-session" https://127.0.0.1/sessionServlet > /dev/null
 EOT
