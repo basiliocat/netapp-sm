@@ -25,4 +25,10 @@ cp -R nginx/* /etc/nginx
 # Generate self-signed ssl certificate. Don't forget to replace it with your ssl certificate!
 openssl req -x509 -nodes -newkey rsa:2048 -keyout /etc/nginx/conf.d/cert.key -out /etc/nginx/conf.d/cert.crt -days 3650 -subj "/CN=`hostname`"
 
+
 /etc/init.d/nginx start
+
+# Optional autorestart
+( crontab -l | sed -e '/SystemManager.jar/d' ; cat << EOT ) | crontab -
+*/5 * * * * pgrep -f "java -Djava.awt.headless=true -jar SystemManager.jar" > /dev/null || /etc/init.d/netapp start
+EOT
